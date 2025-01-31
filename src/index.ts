@@ -2,6 +2,8 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import router from "./routes";
 import AppDataSource from "./db";
+import swaggerUi from "swagger-ui-express";
+import specs from "./config/swaggerConfig";
 
 dotenv.config();
 
@@ -15,6 +17,8 @@ AppDataSource.initialize()
   .catch((error) => {
     console.error(error.message);
   });
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use("/", router);
 
