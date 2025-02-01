@@ -1,5 +1,6 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import dotenv from "dotenv";
+import helmet from "helmet";
 import router from "./routes";
 import AppDataSource from "./db";
 import swaggerUi from "swagger-ui-express";
@@ -17,6 +18,9 @@ AppDataSource.initialize()
   .catch((error) => {
     console.error(error.message);
   });
+app.use(helmet());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(specs));
 
