@@ -16,7 +16,7 @@ export class User {
   @Column()
   fullName!: string;
 
-  @Column()
+  @Column({ default: null })
   position!: string;
 
   @CreateDateColumn()
