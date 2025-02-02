@@ -2,9 +2,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { User } from "./User";
 
 export enum Position {
   UI_ENGINEER = "UI Engineer",
@@ -29,4 +31,7 @@ export class Application {
 
   @UpdateDateColumn()
   updatedAt!: Date;
+
+  @ManyToOne(() => User, (user) => user.applications)
+  user!: User;
 }
